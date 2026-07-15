@@ -1,0 +1,2 @@
+# genz.ai
+GenZ
