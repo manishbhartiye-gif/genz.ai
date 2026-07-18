@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agentic OS Portal</title>
+    <style>
+        body { background: #121212; color: #00ff00; font-family: 'Courier New', monospace; }
+        #log-container { 
+            height: 400px; overflow-y: scroll; border: 1px solid #333; 
+            padding: 10px; background: #000; 
+        }
+    </style>
+</head>
+<body>
+    <h2>System Observability Stream</h2>
+    <div id="log-container"></div>
+
+    <script>
+        // 1. Initialize WebSocket
+        const socket = new WebSocket('ws://localhost:8000/ws/logs');
+
+        socket.onopen = () => {
+            console.log("Connected to System Manager");
+            appendLog("System: Connection established.");
+        };
+
+        // 2. Handle Incoming Logs
+        socket.onmessage = (event) => {
+            appendLog(event.data);
+        };
+
+        // 3. UI Helper: Auto-scroll to bottom
+        function appendLog(message) {
+            const container = document.getElementById('log-container');
+            const logEntry = document.createElement('div');
+            logEntry.textContent = message;
+            container.appendChild(logEntry);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        socket.onclose = () => appendLog("System: Disconnected.");
+        socket.onerror = (err) => appendLog("Error: " + err.message);
+    </script>
+</body>
+</html>
