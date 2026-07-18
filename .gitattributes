@@ -1,0 +1,4 @@
+# Force LF for scripts and code
+*.sh text eol=lf
+*.py text eol=lf
+*.json text eol=lf

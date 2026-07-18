@@ -1,0 +1,11 @@
+{
+  "drafting": {
+    "gemini": "drafting-gemini.sh",
+    "openai": "drafting-openai.sh",
+    "claude": "drafting-claude.sh"
+  },
+  "code": {
+    "local": "executor-local.sh"
+  },
+  "default_fallback": "gemini"
+}
